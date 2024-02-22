@@ -10,7 +10,6 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 const ListItems = (props) => {
   const { title, description, action } = props;
@@ -38,25 +37,16 @@ const ListItems = (props) => {
           </Typography>
         )}
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-          {[0, 1, 2, 3].map((value) => {
+          {[0, 1, 2, 3].map((value, key) => {
             const labelId = `checkbox-list-label-${value}`;
 
             return (
               <ListItem
                 key={value}
                 secondaryAction={
-                  <>
-                    <IconButton
-                      edge='end'
-                      sx={{ marginRight: '5px' }}
-                      aria-label='edit'
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton edge='end' aria-label='delete'>
-                      <DeleteIcon />
-                    </IconButton>
-                  </>
+                  <IconButton edge='end' aria-label='delete'>
+                    <DeleteIcon />
+                  </IconButton>
                 }
                 disablePadding
               >
@@ -77,6 +67,7 @@ const ListItems = (props) => {
                   <ListItemText
                     id={labelId}
                     primary={`Line item ${value + 1}`}
+                    secondary={'This is a description'}
                   />
                 </ListItemButton>
               </ListItem>
