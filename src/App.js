@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import ListView from './Views/ListView';
+import DetailView from './Views/DetailView';
+import { Container } from '@mui/material';
+import Header from './Components/Header';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Container maxWidth='lg'>
+        <Routes>
+          <Route path='/' element={<ListView />} />
+          <Route path='/detail' element={<DetailView />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 
