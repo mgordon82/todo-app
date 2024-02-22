@@ -8,11 +8,12 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 const ListItems = (props) => {
-  const { title, action } = props;
+  const { title, description, action } = props;
   return (
     <div>
       <Grid container justifyContent='space-between'>
@@ -31,6 +32,11 @@ const ListItems = (props) => {
       </Grid>
 
       <Card variant='outlined' sx={{ marginTop: 1, padding: '5px 10px' }}>
+        {description && (
+          <Typography pl={'10px'} variant='caption'>
+            {description}
+          </Typography>
+        )}
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
           {[0, 1, 2, 3].map((value) => {
             const labelId = `checkbox-list-label-${value}`;
