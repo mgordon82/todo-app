@@ -10,6 +10,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 const ListItems = (props) => {
   const { title, action } = props;
   return (
@@ -29,10 +30,8 @@ const ListItems = (props) => {
         {action && <Grid item>Add New</Grid>}
       </Grid>
 
-      <Card variant='outlined' sx={{ marginTop: 1, padding: 2 }}>
-        <List
-          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-        >
+      <Card variant='outlined' sx={{ marginTop: 1, padding: '5px 10px' }}>
+        <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
           {[0, 1, 2, 3].map((value) => {
             const labelId = `checkbox-list-label-${value}`;
 
@@ -40,9 +39,18 @@ const ListItems = (props) => {
               <ListItem
                 key={value}
                 secondaryAction={
-                  <IconButton edge='end' aria-label='comments'>
-                    <EditIcon />
-                  </IconButton>
+                  <>
+                    <IconButton
+                      edge='end'
+                      sx={{ marginRight: '5px' }}
+                      aria-label='edit'
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton edge='end' aria-label='delete'>
+                      <DeleteIcon />
+                    </IconButton>
+                  </>
                 }
                 disablePadding
               >
