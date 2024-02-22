@@ -14,7 +14,7 @@ const ListView = () => {
       <Grid item xs={12}>
         <ListItems
           title='Completed Items'
-          description='Check each box to mark unresolved'
+          description='Check each box to mark incomplete'
         />
       </Grid>
     </Grid>
