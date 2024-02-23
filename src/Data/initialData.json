@@ -1,0 +1,18 @@
+[
+  {
+    "id": 45874,
+    "summary": "Add file",
+    "description": "We can add the file to the email by clicking on the paperclip and selecting the file to add",
+    "completed": false,
+    "createdDate": "20240222",
+    "completedDate": null
+  },
+  {
+    "id": 784854,
+    "summary": "Add subject",
+    "description": "We can add the subject by typing in the subject field what you are trying to summarize in the email",
+    "completed": true,
+    "createdDate": "20240222",
+    "completedDate": "20240221"
+  }
+]
