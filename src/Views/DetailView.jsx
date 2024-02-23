@@ -19,11 +19,17 @@ const DetailView = () => {
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
 
-  const [cachedDetailData, setCachedDetailData] = useState({});
+  const [cachedDetailData, setCachedDetailData] = useState({
+    id: null,
+    summary: '',
+    description: '',
+    createdDate: null,
+    completedDate: null,
+  });
 
   useEffect(() => {
     if (!openDialog) {
-      setCachedDetailData(JSON.parse(localStorage.getItem('detailData')));
+      setCachedDetailData(JSON.parse(localStorage.getItem('detailData')) || {});
     }
   }, [openDialog]);
 
@@ -35,7 +41,7 @@ const DetailView = () => {
       setOpenDialog(false);
     }
   };
-  return (
+  return cachedDetailData !== null ? (
     <Box sx={{ marginTop: '15px', padding: '10px' }}>
       <Breadcrumbs aria-label='breadcrumb'>
         <Link
@@ -86,6 +92,8 @@ const DetailView = () => {
         type='edit'
       />
     </Box>
+  ) : (
+    <div>No data available</div>
   );
 };
 
