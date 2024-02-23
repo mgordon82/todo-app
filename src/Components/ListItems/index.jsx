@@ -12,7 +12,9 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from '@mui/icons-material/Info';
+import { useNavigate } from 'react-router-dom';
 const ListItems = (props) => {
+  const navigate = useNavigate();
   const { title, description, action, data, setData, completed } = props;
   const filteredData = data.filter((item) => item.completed === completed);
   const handleChange = (itemData) => {
@@ -30,6 +32,11 @@ const ListItems = (props) => {
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
+  };
+
+  const handleOpenDetails = (details) => {
+    localStorage.setItem('detailData', JSON.stringify(details));
+    navigate('/detail');
   };
   return (
     <div>
@@ -78,21 +85,20 @@ const ListItems = (props) => {
                     }
                     disablePadding
                   >
+                    <ListItemIcon>
+                      <Checkbox
+                        checked={item.completed}
+                        onChange={() => handleChange(item)}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                    </ListItemIcon>
                     <ListItemButton
                       role={undefined}
-                      // onClick={handleToggle(value)}
+                      onClick={() => handleOpenDetails(item)}
                       dense
                     >
-                      <ListItemIcon>
-                        <Checkbox
-                          edge='start'
-                          checked={item.completed}
-                          onChange={() => handleChange(item)}
-                          tabIndex={-1}
-                          disableRipple
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                      </ListItemIcon>
                       <ListItemText
                         id={labelId}
                         primary={item.summary}
