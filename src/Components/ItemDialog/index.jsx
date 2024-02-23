@@ -5,6 +5,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grid,
+  MenuItem,
+  Select,
   TextField,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -29,6 +32,23 @@ const ItemDialog = (props) => {
       });
     }
   }, [cachedData]);
+
+  const [completed, setCompleted] = useState(updateData.completed || false);
+  const [completedDate, setCompletedDate] = useState(
+    updateData.completedDate || null
+  );
+
+  const handleCompletedChange = (event) => {
+    const isCompleted = event.target.value === 'true';
+    setCompleted(isCompleted);
+
+    if (isCompleted) {
+      const currentDate = new Date().toISOString();
+      setCompletedDate(currentDate);
+    } else {
+      setCompletedDate(null);
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -67,8 +87,8 @@ const ItemDialog = (props) => {
       id: cachedData.id,
       summary: formJson.summary,
       description: formJson.description,
-      completed: false,
-      completedDate: null,
+      completed: completed,
+      completedDate: completedDate,
       createdDate: cachedData.createdDate,
     };
     items[itemIndex] = newItemData;
@@ -129,11 +149,32 @@ const ItemDialog = (props) => {
           variant='outlined'
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
-        <Button variant='contained' type='submit'>
-          {type} To-Do
-        </Button>
+      <DialogActions sx={{ padding: '10px 25px' }}>
+        <Grid
+          container
+          justifyContent={type !== 'edit' ? 'flex-end' : 'space-between'}
+          alignItems='start'
+        >
+          {type === 'edit' && (
+            <Grid item>
+              <Select
+                labelId='completed-select-label'
+                value={completed.toString()}
+                onChange={handleCompletedChange}
+                size='small'
+              >
+                <MenuItem value='false'>Incomplete</MenuItem>
+                <MenuItem value='true'>Completed</MenuItem>
+              </Select>
+            </Grid>
+          )}
+          <Grid item>
+            <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+            <Button variant='contained' type='submit'>
+              {type} To-Do
+            </Button>
+          </Grid>
+        </Grid>
       </DialogActions>
     </Dialog>
   );
