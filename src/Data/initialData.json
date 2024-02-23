@@ -4,7 +4,7 @@
     "summary": "Add file",
     "description": "We can add the file to the email by clicking on the paperclip and selecting the file to add",
     "completed": false,
-    "createdDate": "20240222",
+    "createdDate": "2024-02-23T03:17:16.204Z",
     "completedDate": null
   },
   {
@@ -12,7 +12,7 @@
     "summary": "Add subject",
     "description": "We can add the subject by typing in the subject field what you are trying to summarize in the email",
     "completed": true,
-    "createdDate": "20240222",
-    "completedDate": "20240221"
+    "createdDate": "2024-02-23T05:17:16.204Z",
+    "completedDate": "2024-02-23T06:17:16.204Z"
   }
 ]
