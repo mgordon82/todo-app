@@ -85,15 +85,17 @@ const ListItems = (props) => {
                     }
                     disablePadding
                   >
-                    <ListItemIcon>
+                    <IconButton
+                      sx={{ flexGrow: 0 }}
+                      onClick={() => handleChange(item)}
+                    >
                       <Checkbox
                         checked={item.completed}
-                        onChange={() => handleChange(item)}
                         tabIndex={-1}
                         disableRipple
                         inputProps={{ 'aria-labelledby': labelId }}
                       />
-                    </ListItemIcon>
+                    </IconButton>
                     <ListItemButton
                       role={undefined}
                       onClick={() => handleOpenDetails(item)}
