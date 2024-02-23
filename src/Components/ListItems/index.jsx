@@ -17,7 +17,13 @@ const ListItems = (props) => {
   const filteredData = data.filter((item) => item.completed === completed);
   const handleChange = (itemData) => {
     const newData = data.map((item) =>
-      item.id === itemData.id ? { ...item, completed: !item.completed } : item
+      item.id === itemData.id
+        ? {
+            ...item,
+            completed: !item.completed,
+            completedDate: !item.completed ? new Date().toISOString() : null,
+          }
+        : item
     );
     setData(newData);
   };
