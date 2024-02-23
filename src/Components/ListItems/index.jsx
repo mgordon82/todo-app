@@ -37,6 +37,7 @@ const ListItems = (props) => {
         : item
     );
     setData(newData);
+    localStorage.setItem('todoList', JSON.stringify(newData));
   };
 
   const handleDelete = (id) => {
