@@ -4,6 +4,7 @@ import {
   Card,
   Chip,
   Grid,
+  IconButton,
   Link,
   Tooltip,
   Typography,
@@ -11,19 +12,29 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatDateTime } from '../utils/formatDateTime';
+import EditIcon from '@mui/icons-material/Edit';
+import ItemDialog from '../Components/ItemDialog';
 
 const DetailView = () => {
   const navigate = useNavigate();
-  const local = JSON.parse(localStorage.getItem('detailData')) || {};
-  const [data, setData] = useState({});
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const [cachedDetailData, setCachedDetailData] = useState({});
 
   useEffect(() => {
-    if (local) {
-      setData(local);
+    if (!openDialog) {
+      setCachedDetailData(JSON.parse(localStorage.getItem('detailData')));
     }
-  }, []);
+  }, [openDialog]);
 
-  const { summary, description, completed, completedDate, createdDate } = data;
+  const { summary, description, completed, completedDate, createdDate } =
+    cachedDetailData;
+
+  const handleCloseDialog = (event, reason) => {
+    if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+      setOpenDialog(false);
+    }
+  };
   return (
     <Box sx={{ marginTop: '15px', padding: '10px' }}>
       <Breadcrumbs aria-label='breadcrumb'>
@@ -49,6 +60,13 @@ const DetailView = () => {
             ) : (
               <Chip color='warning' label='Incomplete' size='small' />
             )}
+            <IconButton
+              size='small'
+              onClick={() => setOpenDialog(true)}
+              sx={{ marginLeft: '5px' }}
+            >
+              <EditIcon />
+            </IconButton>
           </Grid>
           <Grid item xs={12}>
             Description: {description}
@@ -60,6 +78,13 @@ const DetailView = () => {
           </Grid>
         </Grid>
       </Card>
+      <ItemDialog
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        handleCloseDialog={handleCloseDialog}
+        cachedData={cachedDetailData}
+        type='edit'
+      />
     </Box>
   );
 };

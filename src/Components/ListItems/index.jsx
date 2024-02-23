@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   Checkbox,
   Grid,
@@ -6,17 +7,25 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import ItemDialog from '../ItemDialog';
+
 const ListItems = (props) => {
+  const { title, description, action, data, setData, completed, setTrigger } =
+    props;
+
   const navigate = useNavigate();
-  const { title, description, action, data, setData, completed } = props;
+
+  const [openDialog, setOpenDialog] = useState(false);
+
   const filteredData = data.filter((item) => item.completed === completed);
+
   const handleChange = (itemData) => {
     const newData = data.map((item) =>
       item.id === itemData.id
@@ -31,12 +40,21 @@ const ListItems = (props) => {
   };
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    const updatedData = data.filter((item) => item.id !== id);
+    localStorage.setItem('todoList', JSON.stringify(updatedData));
+    setTrigger(true);
   };
 
   const handleOpenDetails = (details) => {
     localStorage.setItem('detailData', JSON.stringify(details));
     navigate('/detail');
+  };
+
+  const handleCloseDialog = (event, reason) => {
+    if (reason !== 'backdropClick' && reason !== 'escapeKeyDown') {
+      setOpenDialog(false);
+      setTrigger(true);
+    }
   };
   return (
     <div>
@@ -52,7 +70,13 @@ const ListItems = (props) => {
             {title || ''}
           </h3>
         </Grid>
-        {action && <Grid item>Add New</Grid>}
+        {action && (
+          <Grid item>
+            <Button onClick={() => setOpenDialog(true)} size='small'>
+              Add New
+            </Button>
+          </Grid>
+        )}
       </Grid>
 
       <Card variant='outlined' sx={{ marginTop: 1, padding: '5px 10px' }}>
@@ -116,6 +140,12 @@ const ListItems = (props) => {
           'No items to show'
         )}
       </Card>
+      <ItemDialog
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        handleCloseDialog={handleCloseDialog}
+        type='add'
+      />
     </div>
   );
 };
