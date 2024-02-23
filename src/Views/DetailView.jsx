@@ -5,6 +5,7 @@ import {
   Chip,
   Grid,
   Link,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -42,11 +43,12 @@ const DetailView = () => {
           <Grid item>Summary: {summary}</Grid>
           <Grid item>
             {completed ? (
-              <Chip color='success' label='Complete' size='small' />
+              <Tooltip title={`Completed On: ${formatDateTime(completedDate)}`}>
+                <Chip color='success' label='Complete' size='small' />
+              </Tooltip>
             ) : (
               <Chip color='warning' label='Incomplete' size='small' />
             )}
-            {completed && <p>Completed On: {formatDateTime(completedDate)}</p>}
           </Grid>
           <Grid item xs={12}>
             Description: {description}
