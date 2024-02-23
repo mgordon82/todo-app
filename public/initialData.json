@@ -1,0 +1,42 @@
+[
+  {
+    "id": "7f9f5a01",
+    "summary": "Buy groceries",
+    "description": "Milk, bread, eggs, and cheese",
+    "completed": false,
+    "completedDate": null,
+    "createdDate": "2024-02-23T08:00:00Z"
+  },
+  {
+    "id": "e12a6b33",
+    "summary": "Fix leaking faucet",
+    "description": "Check under the sink for the issue",
+    "completed": true,
+    "completedDate": "2024-02-22T15:30:00Z",
+    "createdDate": "2024-02-20T10:15:00Z"
+  },
+  {
+    "id": "8d43c77b",
+    "summary": "Plan vacation",
+    "description": "Research destinations and book flights",
+    "completed": false,
+    "completedDate": null,
+    "createdDate": "2024-02-18T16:45:00Z"
+  },
+  {
+    "id": "4e6f2b89",
+    "summary": "Read book",
+    "description": "Start reading 'The Great Gatsby'",
+    "completed": true,
+    "completedDate": "2024-02-21T20:00:00Z",
+    "createdDate": "2024-02-15T14:20:00Z"
+  },
+  {
+    "id": "c3a9d8e7",
+    "summary": "Attend meeting",
+    "description": "Discuss project updates",
+    "completed": true,
+    "completedDate": "2024-02-23T11:00:00Z",
+    "createdDate": "2024-02-22T09:30:00Z"
+  }
+]
