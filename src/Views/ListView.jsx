@@ -19,8 +19,6 @@ const ListView = () => {
     localStorage.setItem('todoList', JSON.stringify(todoData));
   }, [todoData]);
 
-  console.log('todo data', todoData);
-
   return (
     <Grid sx={{ padding: '20px 0px' }} container spacing={5}>
       {todoData && (
