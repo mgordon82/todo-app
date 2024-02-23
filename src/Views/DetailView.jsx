@@ -1,7 +1,18 @@
+import {
+  Box,
+  Breadcrumbs,
+  Card,
+  Chip,
+  Grid,
+  Link,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
-// import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { formatDateTime } from '../utils/formatDateTime';
 
 const DetailView = () => {
+  const navigate = useNavigate();
   const local = JSON.parse(localStorage.getItem('detailData')) || {};
   const [data, setData] = useState({});
 
@@ -13,14 +24,41 @@ const DetailView = () => {
 
   const { summary, description, completed, completedDate, createdDate } = data;
   return (
-    <div>
-      <h2>Details</h2>
-      <p>Summary: {summary}</p>
-      <p>Description: {description}</p>
-      <p>Complete: {completed ? 'Completed' : 'Incomplete'}</p>
-      {completed && <p>Completed On: {completedDate}</p>}
-      <p>Created On: {createdDate}</p>
-    </div>
+    <Box sx={{ marginTop: '15px', padding: '10px' }}>
+      <Breadcrumbs aria-label='breadcrumb'>
+        <Link
+          underline='hover'
+          onClick={() => navigate('/')}
+          sx={{ cursor: 'pointer' }}
+        >
+          To-Do Dashboard
+        </Link>
+        <Link underline='none' color='text.primary' aria-current='page'>
+          Details
+        </Link>
+      </Breadcrumbs>
+      <Card raised sx={{ marginTop: '15px', padding: '10px' }}>
+        <Grid container justifyContent='space-between' spacing={3}>
+          <Grid item>Summary: {summary}</Grid>
+          <Grid item>
+            {completed ? (
+              <Chip color='success' label='Complete' size='small' />
+            ) : (
+              <Chip color='warning' label='Incomplete' size='small' />
+            )}
+            {completed && <p>Completed On: {formatDateTime(completedDate)}</p>}
+          </Grid>
+          <Grid item xs={12}>
+            Description: {description}
+          </Grid>
+          <Grid item xs={12} textAlign='right'>
+            <Typography variant='caption'>
+              Created On: {formatDateTime(createdDate)}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Card>
+    </Box>
   );
 };
 
