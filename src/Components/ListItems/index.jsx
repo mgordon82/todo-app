@@ -74,7 +74,7 @@ const ListItems = (props) => {
         {action && (
           <Grid item>
             <Button onClick={() => setOpenDialog(true)} size='small'>
-              Add New
+              Add New Todo
             </Button>
           </Grid>
         )}
