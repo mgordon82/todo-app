@@ -4,7 +4,7 @@ import App from '../App';
 
 jest.mock('../__mocks__/initialData.js');
 
-describe('ListItems', () => {
+describe('ListView', () => {
   test('opens dialog box to add a todo item', async () => {
     const { getByText } = render(<App />);
     await waitFor(() => {
