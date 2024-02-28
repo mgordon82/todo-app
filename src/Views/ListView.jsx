@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 import ListItems from '../Components/ListItems';
 import { useEffect, useState } from 'react';
 import { useDetailContext } from '../Contexts';
+import axios from 'axios';
 
 const ListView = () => {
   const { data, updateData } = useDetailContext();
@@ -18,14 +19,17 @@ const ListView = () => {
             updateData(JSON.parse(localStorage.getItem('todoList')));
             setIsLoading(false);
           } else {
-            const response = await fetch('/initialData.json');
-            if (!response.ok) {
-              throw new Error('Problems fetching data');
-            }
-            const jsonData = await response.json();
-            updateData(jsonData);
-            localStorage.setItem('todoList', JSON.stringify(jsonData));
-            setIsLoading(false);
+            axios
+              .get('/initialData.json')
+              .then((res) => {
+                updateData(res.data);
+                localStorage.setItem('todoList', JSON.stringify(res.data));
+                setIsLoading(false);
+              })
+              .catch((err) => {
+                setError(error.message);
+                setIsLoading(false);
+              });
           }
         } catch (error) {
           setError(error.message);
